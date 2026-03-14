@@ -54,6 +54,11 @@ export const App: React.FC = () => {
     [todos],
   );
 
+  const areAllCompleted = useMemo(
+    () => todos.length > 0 && todos.every(todo => todo.completed),
+    [todos],
+  );
+
   if (!USER_ID) {
     return <UserWarning />;
   }
@@ -63,7 +68,7 @@ export const App: React.FC = () => {
       <h1 className="todoapp__title">todos</h1>
 
       <div className="todoapp__content">
-        <TodoHeader todos={todos} />
+        <TodoHeader todos={todos} areAllCompleted={areAllCompleted} />
 
         <TodoList todos={filteredTodos} isLoading={isLoading} />
 
